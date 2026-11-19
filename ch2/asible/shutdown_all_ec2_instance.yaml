@@ -1,0 +1,29 @@
+- name: Terminate EC2 instances in AWS
+  hosts: localhost
+  gather_facts: false
+
+  vars:
+    aws_region: ap-southeast-2
+    tag:
+      Ansible: sample_app_ansible
+
+  tasks:
+    - name: Find EC2 instances by tag
+      amazon.aws.ec2_instance_info:
+        region: "{{ aws_region }}"
+        filters:
+          "tag:Ansible": "{{ tag.Ansible }}"
+          instance-state-name:
+            - pending
+            - running
+            - stopping
+            - stopped
+      register: ec2_instances
+
+    - name: Terminate filtered EC2 instances
+      amazon.aws.ec2_instance:
+        region: "{{ aws_region }}"
+        instance_ids: "{{ ec2_instances.instances | map(attribute='instance_id') | list }}"
+        state: terminated
+        wait: true
+      when: ec2_instances.instances | length > 0

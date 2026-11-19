@@ -1,0 +1,15 @@
+{
+  "accountId": "106217160565",
+  "region": "ap-southeast-2",
+  "vpcId": "vpc-0006dbe397f0951b5",
+  "securityGroupId": "sg-024c03ab39e6641fc",
+  "securityGroupCreated": false,
+  "amiId": "ami-0e4d04d2758e8deb5",
+  "instanceType": "t3.micro",
+  "requestedCount": 3,
+  "instanceIds": [
+    "i-01afe8571257f7595",
+    "i-06a8632afb8318501",
+    "i-07ec67f67802d2eca"
+  ]
+}
