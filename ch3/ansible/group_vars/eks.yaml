@@ -1,0 +1,8 @@
+aws_region: ap-southeast-2
+cluster_name: eks-sample
+vpc_id: vpc-xxxxxx
+lbc_chart_version: "3.6.3"
+lbc_release_name: aws-load-balancer-controller
+lbc_namespace: kube-system
+lbc_service_account: aws-load-balancer-controller
+lbc_service_account_create: true

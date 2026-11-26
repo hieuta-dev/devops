@@ -1,0 +1,6 @@
+- name: Configure EKS Cluster
+  hosts: eks
+  gather_facts: false
+
+  roles:
+    - aws-load-balancer-controller

@@ -1,0 +1,26 @@
+- name: Add EKS Helm repository
+  kubernetes.core.helm_repository:
+    name: eks
+    repo_url: https://aws.github.io/eks-charts
+
+- name: Update EKS Helm repository
+  ansible.builtin.command: helm repo update eks
+  changed_when: false
+
+- name: Install or upgrade AWS Load Balancer Controller
+  kubernetes.core.helm:
+    name: aws-load-balancer-controller
+    chart_ref: eks/aws-load-balancer-controller
+    chart_version: "{{ lbc_chart_version }}"
+    release_namespace: kube-system
+    release_state: present
+    wait: true
+
+    release_values:
+      clusterName: "{{ cluster_name }}"
+      region: "{{ aws_region }}"
+      vpcId: "{{ vpc_id }}"
+
+      serviceAccount:
+        create: true
+        name: aws-load-balancer-controller

@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: sample-app-pods
+  namespace: default
+
+spec:
+  type: ClusterIP
+
+  selector:
+    app: sample-app-pods
+
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 8080
